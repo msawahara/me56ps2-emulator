@@ -27,7 +27,7 @@ $ make nanopi-neo2  # for NanoPi NEO2
 Requires root privileges to use the USB Raw Gadget.
 Run as root user or use sudo if necessary.
 
-#### Run as server
+#### Run as a server
 When listening on port 10023
 ```shell
 $ sudo ./me56ps2 -s 0.0.0.0 10023
