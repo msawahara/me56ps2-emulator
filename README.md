@@ -1,5 +1,5 @@
 # ME56PS2 emulator
-This software emulates ME56PS2 (manufactured by Omron; PlayStation 2 compatible modem) and performs communication via the Internet.
+This software emulates ME56PS2 (PlayStation 2 compatible modem; manufactured by Omron) and performs communication via the Internet.
 
 By using this software, game software that supports modem communication can be used via the Internet.
 
@@ -24,7 +24,7 @@ $ make nanopi-neo2  # for NanoPi NEO2
 ```
 
 ### Run
-Privileges are required to use the USB Raw Gadget.
+Requires root privileges to use the USB Raw Gadget.
 Run as root user or use sudo if necessary.
 
 #### Run as server
