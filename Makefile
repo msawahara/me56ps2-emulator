@@ -16,11 +16,11 @@ rpi4: $(TARGET)
 
 .PHONY: rpi-zero
 rpi-zero:
-	make CXXFLAGS="$(CXXFLAGS) -DHW_RPI_ZERO" $(TARGET)
+	$(MAKE) CXXFLAGS="$(CXXFLAGS) -DHW_RPI_ZERO" $(TARGET)
 
 .PHONY: nanopi-neo2
 nanopi-neo2:
-	make CXXFLAGS="$(CXXFLAGS) -DHW_NANOPI_NEO2" $(TARGET)
+	$(MAKE) CXXFLAGS="$(CXXFLAGS) -DHW_NANOPI_NEO2" $(TARGET)
 
 .PHONY: clean
 clean:
