@@ -20,7 +20,7 @@ $ make rpi4  # for Raspberry Pi 4
 If you use a different board than the Raspberry Pi 4, use below.
 ```shell
 $ make rpi-zero  # for Raspberry Pi Zero
-$ make nanopi-neo2  # for NanoPi NEO2
+$ make nanopi-neo2  # for NanoPi NEO2, Lichee Zero
 ```
 
 ### Run
