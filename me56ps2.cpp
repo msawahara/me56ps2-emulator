@@ -190,6 +190,19 @@ bool process_control_packet(usb_raw_gadget *usb, usb_raw_control_event *e, struc
         pkt->header.length = 0;
         return true;
     }
+    if (e->is_event(USB_TYPE_VENDOR, 0x01)) {
+        pkt->header.length = 0;
+
+        if ((e->ctrl.wValue & 0x0101) == 0x0100) {
+            // set DTR to LOW for on-hook
+            if (debug_level >= 2) {printf("on-hook\n");};
+        } else if ((e->ctrl.wValue & 0x0101) == 0x0101) {
+            // set DTR to HIGH for off-hook
+            if (debug_level >= 2) {printf("off-hook\n");};
+        }
+
+        return true;
+    }
     if (e->is_event(USB_TYPE_VENDOR)) {
         pkt->header.length = 0;
         return true;
