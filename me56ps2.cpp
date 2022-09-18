@@ -3,6 +3,7 @@
 #include <chrono>
 #include <cstdio>
 #include <cstring>
+#include <string>
 #include <thread>
 #include <unistd.h>
 
@@ -22,6 +23,42 @@ tcp_sock *sock;
 int debug_level = 0;
 
 std::atomic<bool> connected(false);
+
+bool parse_address(const std::string addr, struct sockaddr_in *parsed_addr)
+{
+    // Input format: "000-000-000-000#00000"
+    int d[4] = {0, 0, 0, 0};
+    int port = TCP_DEFAULT_PORT;
+
+    auto has_port = addr.find('#') != std::string::npos;
+
+    // Parse IPv4 address
+    if (has_port) {
+        auto ret = sscanf(addr.c_str(), "%u-%u-%u-%u#%u", &d[0], &d[1], &d[2], &d[3], &port);
+        if (ret != 5) {return false;}
+    } else {
+        auto ret = sscanf(addr.c_str(), "%u-%u-%u-%u", &d[0], &d[1], &d[2], &d[3]);
+        if (ret != 4) {return false;}
+    }
+
+    // Check each digit range
+    for (int i = 0; i < 4; i++) {
+        if (d[i] < 0 || d[i] > 255) {return false;}
+    }
+
+    // Check port range (1 - 65535)
+    if (port < 1 || port > 65535) {return false;}
+
+    char ip_addr[16];
+    sprintf(ip_addr, "%d.%d.%d.%d", d[0], d[1], d[2], d[3]);
+
+    memset(parsed_addr, 0, sizeof(*parsed_addr));
+    parsed_addr->sin_family = AF_INET;
+    parsed_addr->sin_port = htons(port);
+    parsed_addr->sin_addr.s_addr = inet_addr(ip_addr);
+
+    return true;
+}
 
 void ring_callback()
 {
@@ -119,6 +156,10 @@ void *usb_bulk_out_thread(usb_raw_gadget *usb, int ep_num) {
             }
             if (strncmp(line.c_str(), "ATD", 3) == 0) {
                 // Dial. Ignore after "ATD"
+                struct sockaddr_in addr;
+                if (parse_address(line.substr(4), &addr)) {
+                    sock->set_addr(&addr);
+                }
                 if (sock->connect()) {
                     reply = "CONNECT 57600 V42\r\n";
                     enter_online = true;

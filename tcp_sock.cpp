@@ -132,6 +132,11 @@ void tcp_sock::set_recv_callback(void (*func)(const char *, size_t))
     recv_callback = func;
 }
 
+void tcp_sock::set_addr(const struct sockaddr_in *addr_in)
+{
+    memcpy(&addr, addr_in, sizeof(addr));
+}
+
 bool tcp_sock::is_connected()
 {
     return comm_fd.load() != 0;

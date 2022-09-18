@@ -9,6 +9,8 @@ constexpr char USB_RAW_GADGET_DRIVER_DEFAULT[] = "fe980000.usb";
 constexpr char USB_RAW_GADGET_DEVICE_DEFAULT[] = "fe980000.usb";
 #endif
 
+constexpr auto TCP_DEFAULT_PORT = 10023;
+
 constexpr auto BCD_USB = 0x0110U; // USB 1.1
 constexpr auto BCD_DEVICE = 0x0101U;
 constexpr auto USB_VENDOR = 0x0590U; // Omron Corp.

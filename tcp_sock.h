@@ -21,6 +21,7 @@ class tcp_sock {
         void set_debug_level(const int level);
         void set_ring_callback(void (*func)(void));
         void set_recv_callback(void (*func)(const char *, size_t));
+        void set_addr(const struct sockaddr_in *addr_in);
         bool is_connected();
         bool connect();
         void disconnect();
