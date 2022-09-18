@@ -196,6 +196,12 @@ bool process_control_packet(usb_raw_gadget *usb, usb_raw_control_event *e, struc
         if ((e->ctrl.wValue & 0x0101) == 0x0100) {
             // set DTR to LOW for on-hook
             if (debug_level >= 2) {printf("on-hook\n");};
+            // disconnect
+            connected.store(false);
+            if (sock != nullptr && sock->is_connected()) {
+                sock->disconnect();
+                printf("disconnected.\n");
+            }
         } else if ((e->ctrl.wValue & 0x0101) == 0x0101) {
             // set DTR to HIGH for off-hook
             if (debug_level >= 2) {printf("off-hook\n");};
