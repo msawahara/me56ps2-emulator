@@ -19,7 +19,8 @@ $ make rpi4  # for Raspberry Pi 4
 
 If you use a different board than the Raspberry Pi 4, use below.
 ```shell
-$ make rpi-zero  # for Raspberry Pi Zero
+$ make rpi-zero  # for Raspberry Pi Zero W
+$ make rpi-zero2  # for Raspberry Pi Zero 2 W
 $ make nanopi-neo2  # for NanoPi NEO2, Lichee Zero
 ```
 

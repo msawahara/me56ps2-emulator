@@ -18,6 +18,10 @@ rpi4: $(TARGET)
 rpi-zero:
 	$(MAKE) CXXFLAGS="$(CXXFLAGS) -DHW_RPI_ZERO" $(TARGET)
 
+.PHONY: rpi-zero2
+rpi-zero2:
+	$(MAKE) CXXFLAGS="$(CXXFLAGS) -DHW_RPI_ZERO2" $(TARGET)
+
 .PHONY: nanopi-neo2
 nanopi-neo2:
 	$(MAKE) CXXFLAGS="$(CXXFLAGS) -DHW_NANOPI_NEO2" $(TARGET)

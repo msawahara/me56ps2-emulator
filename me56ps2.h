@@ -1,9 +1,12 @@
 #if defined(HW_NANOPI_NEO2) // for NanoPi NEO2
 constexpr char USB_RAW_GADGET_DRIVER_DEFAULT[] = "musb-hdrc";
 constexpr char USB_RAW_GADGET_DEVICE_DEFAULT[] = "musb-hdrc.2.auto";
-#elif defined(HW_RPI_ZERO) // for Raspberry Pi Zero
+#elif defined(HW_RPI_ZERO) // for Raspberry Pi Zero W
 constexpr char USB_RAW_GADGET_DRIVER_DEFAULT[] = "20980000.usb";
 constexpr char USB_RAW_GADGET_DEVICE_DEFAULT[] = "20980000.usb";
+#elif defined(HW_RPI_ZERO2) // for Raspberry Pi Zero 2 W
+constexpr char USB_RAW_GADGET_DRIVER_DEFAULT[] = "3f980000.usb";
+constexpr char USB_RAW_GADGET_DEVICE_DEFAULT[] = "3f980000.usb";
 #else // for Raspberry Pi 4 Model B
 constexpr char USB_RAW_GADGET_DRIVER_DEFAULT[] = "fe980000.usb";
 constexpr char USB_RAW_GADGET_DEVICE_DEFAULT[] = "fe980000.usb";
