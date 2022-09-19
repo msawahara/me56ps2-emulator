@@ -20,6 +20,8 @@ class ring_buffer
         ring_buffer(const size_t size);
         ~ring_buffer();
         bool is_empty(void);
+        size_t get_buffer_size(void);
+        size_t get_count(void);
         size_t enqueue(const T *data, size_t length);
         size_t dequeue(T *data, size_t max_length);
         bool wait(const std::chrono::steady_clock::time_point &timeout_at);
@@ -60,6 +62,19 @@ bool ring_buffer<T>::is_empty(void)
     std::lock_guard<std::mutex> lock(mtx);
 
     return is_empty_without_lock();
+}
+
+template <typename T>
+size_t ring_buffer<T>::get_buffer_size(void)
+{
+    return buffer_size - 1;
+}
+
+template <typename T>
+size_t ring_buffer<T>::get_count(void)
+{
+    std::lock_guard<std::mutex> lock(mtx);
+    return (write_ptr - read_ptr + buffer_size) % buffer_size;
 }
 
 template <typename T>

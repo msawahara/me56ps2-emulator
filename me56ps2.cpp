@@ -73,6 +73,11 @@ void recv_callback(const char *buffer, size_t length)
 {
     if (connected.load()) {
         const auto sent_length = usb_tx_buffer.enqueue(buffer, length);
+        if (debug_level >= 2) {
+            const auto buffer_size = usb_tx_buffer.get_buffer_size();
+            const auto data_count = usb_tx_buffer.get_count();
+            printf("usb_tx_buffer: used %ld bytes / %ld bytes (%.f%% used).\n", (long) data_count, (long) buffer_size, (float) data_count / buffer_size);
+        }
         if (sent_length < length) {
             printf("Transmit buffer is full! (overflow %ld bytes.)\n", length - sent_length);
         }
