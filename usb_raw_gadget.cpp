@@ -102,7 +102,7 @@ int usb_raw_gadget::ep0_write(struct usb_raw_ep_io *io)
         throw std::runtime_error((std::string) "ioctl(USB_RAW_IOCTL_EP0_WRITE): " + std::strerror(errno));
     }
     if (debug_level >= 1) {printf("ep0: write: transferred %d bytes.\n", ret);}
-    if (debug_level >= 2) {dump_hex_and_ascii(io->data, ret);}
+    if (debug_level >= 3) {dump_hex_and_ascii(io->data, ret);}
     return ret;
 }
 
@@ -113,7 +113,7 @@ int usb_raw_gadget::ep0_read(struct usb_raw_ep_io *io)
         throw std::runtime_error((std::string) "ioctl(USB_RAW_IOCTL_EP0_READ): " + std::strerror(errno));
     }
     if (debug_level >= 1) {printf("ep0: read: transferred %d bytes.\n", ret);}
-    if (debug_level >= 2) {dump_hex_and_ascii(io->data, ret);}
+    if (debug_level >= 3) {dump_hex_and_ascii(io->data, ret);}
     return ret;
 }
 
@@ -142,7 +142,7 @@ int usb_raw_gadget::ep_write(struct usb_raw_ep_io *io)
         throw std::runtime_error((std::string) "ioctl(USB_RAW_IOCTL_EP_WRITE): " + std::strerror(errno));
     }
     if (debug_level >= 1) {printf("ep%d: write: transferred %d bytes.\n", io->ep, ret);}
-    if (debug_level >= 2) {dump_hex_and_ascii(io->data, ret);}
+    if (debug_level >= 3) {dump_hex_and_ascii(io->data, ret);}
     return ret;
 }
 
@@ -153,7 +153,7 @@ int usb_raw_gadget::ep_read(struct usb_raw_ep_io *io)
         throw std::runtime_error((std::string) "ioctl(USB_RAW_IOCTL_EP_READ): " + std::strerror(errno));
     }
     if (debug_level >= 1) {printf("ep%d: read: transferred %d bytes.\n", io->ep, ret);}
-    if (debug_level >= 2) {dump_hex_and_ascii(io->data, ret);}
+    if (debug_level >= 3) {dump_hex_and_ascii(io->data, ret);}
     return ret;
 }
 
